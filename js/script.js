@@ -182,7 +182,7 @@
     }
 
     /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
-    const tagLinks = document.querySelectorAll('a[href=" href "]');
+    const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
     console.log('tagLinks:', tagLinks);
 
     /* [DONE] START LOOP: for each found tag link */
@@ -276,7 +276,7 @@
       }
 
       /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
-      const authorLinks = document.querySelectorAll('a[href=" href "]');
+      const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
       console.log('authorLinks:', authorLinks);
 
       /* [DONE] START LOOP: for each found tag link */
