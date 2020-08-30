@@ -164,7 +164,7 @@ function calculateTagsClass(count, params){
 
         /* add generated code to html variable */
         html = html + '&nbsp;' + tagHTML;
-        // tu wyświetlają się tagi pod artykułami
+
 
         /* [NEW] check if this link is NOT already in allTags */
         if(!allTags[tag]){
@@ -177,6 +177,7 @@ function calculateTagsClass(count, params){
       }
       /* insert HTML of all the links into the tags wrapper */
      tagList.innerHTML = html;
+      // tu wyświetlają się tagi pod artykułami
 
     /* END LOOP: for every article: */
     }
@@ -199,7 +200,7 @@ for(let tag in allTags){
 
 /*[NEW] add HTML from allTagsHTML to tagList */
 tagList.innerHTML = allTagsHTML;
-  }
+}
   generateTags();
 
   // [DONE] DODANIE AKCJI PO KLIKNIĘCIU W TAG
@@ -267,6 +268,9 @@ tagList.innerHTML = allTagsHTML;
   // [DONE] DODANIE NAZWISK AUTOROW POD TYTUŁEM ARTYKUŁU
   function generateAuthors() {
 
+    /* [NEW] create a new variable allAuthorArticles with an empty object */
+    let allAuthorArticles = {};
+
     /* [DONE] find all articles */
     const articles = document.querySelectorAll(optArticleSelector);
 
@@ -286,14 +290,44 @@ tagList.innerHTML = allTagsHTML;
       /* make HTML */
       const html = '<a href="#author-' + articleAuthor + '"><span> by ' + articleAuthor + '</span></a>';
 
+       /* [NEW] check if this link is NOT already in allAuthorArticles */
+       if(!allAuthorArticles[articleAuthor]){
+        /* [NEW] add generated code to allAuthorArticles object */
+        allAuthorArticles[articleAuthor]=1;
+      } else {
+        allAuthorArticles[articleAuthor]++;
+      }
+
       /* [DONE] insert data-author attribute into the author wrapper */
 
-      authorField.innerHTML = html;
+      authorField.innerHTML = html; //tu się wyświetla autor ponizej tytułu
 
       /* [DONE] END LOOP: for every article: */
     }
+    /* find list of tags in right column */
+    const authorsList = document.querySelector('.sidebar .authors');
+    console.log('authorsList:', authorsList);
+
+
+    /* [NEW] create variable for all links HTML code */
+    let allAuthorsHTML = '';
+    console.log('allAuthorsHTML:', allAuthorsHTML);
+ //const authorsParams = calculateAuthorsParams(allTags);
+ //console.log('authorsParams:', authorsParams);
+
+ /* [NEW] START LOOP: for each articleAuthor in allAuthorArticles: */
+ for(let articleAuthor in allAuthorArticles){
+   /* [NEW] generate code of a link and add it to allAuthorsHTML */
+   allAuthorsHTML += '<a href="#author-' + articleAuthor + '"><span>' + articleAuthor + '</span></a>(' + allAuthorArticles[articleAuthor] + ')<br>' ;
+ console.log('allAuthorsHTML:', allAuthorsHTML);
+
+ /* [NEW] END LOOP: for each articleAuthor in allAuthorArticles: */
   }
-  generateAuthors();
+ /*[NEW] add HTML from allAuthorsHTML to authorsList */
+ authorsList.innerHTML = allAuthorsHTML;
+ console.log('authorList:', authorsList);
+}
+generateAuthors();
 
   // DODANIE AKCJI PO KLIKNIĘCIU W AUTORA
 
