@@ -90,6 +90,30 @@ body {
     display: inline-block;
   }
 }
+/* Tag cloud */
+.tags {
+  display: inline;
+}
+.tag-size-1{
+  font-size: 120%;
+  color:red;
+}
+.tag-size-2{
+  font-size: 140%;
+  color: blue;
+}
+.tag-size-3{
+  font-size: 160%;
+  color: green;
+}
+.tag-size-4{
+  font-size: 180%;
+  color: orange
+}
+.tag-size-5{
+  font-size: 200%;
+  color: navy;
+}
 
 /* Authors */
 

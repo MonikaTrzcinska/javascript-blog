@@ -1,5 +1,15 @@
 {
   'use strict';
+
+  const optArticleSelector = '.post',
+        optTitleSelector = '.post-title',
+        optTitleListSelector = '.titles',
+        optArticleTagSelector = '.post-tags .list',
+        optArticleAuthorSelector = '.post-author';
+        optTagListSelector = '.tags.list',
+        optCloudClassCount = 5,
+        optCloudClassPrefix = 'tag-size-';
+
   const titleClickHandler = function (event) {
     event.preventDefault();
     const clickedElement = this;
@@ -48,12 +58,7 @@
   //   link.addEventListener('click', titleClickHandler);
   // }
 
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagSelector = '.post-tags .list',
-    optArticleAuthorSelector = '.post-author';
-    optTagListSelector = '.tags.list'
+
 
     // GENEROWANIE LISTY TYTUŁOW W LEWEJ KOLUMNIE
   function generateTitleLinks(customSelector = '') {
@@ -106,6 +111,21 @@
 
   }
   generateTitleLinks();
+
+
+  function calculateTagsParams(obj){
+    const params = {min:100, max:0};
+    for(let key in obj){
+      params.min = Math.min(obj[key], params.min);
+      params.max = Math.max(obj[key], params.max)
+    }
+     return params;
+  }
+
+function calculateTagsClass(count, params){
+  const classNumber = Math.floor( ( (count - params.min) / (params.max - params.min) ) * (optCloudClassCount - 1) + 1 );
+  return(optCloudClassPrefix + classNumber);
+}
 
   // [DONE] GENEROWANIE TAGÓW POD ARTYKUŁAMI
   function generateTags() {
@@ -167,10 +187,13 @@
     /* [NEW] create variable for all links HTML code */
 let allTagsHTML = '';
 
+const tagsParams = calculateTagsParams(allTags);
+console.log('tagsParams:', tagsParams);
+
 /* [NEW] START LOOP: for each tag in allTags: */
 for(let tag in allTags){
   /* [NEW] generate code of a link and add it to allTagsHTML */
-  allTagsHTML += '<a href="#tag-' + tag + '"><span>' + tag + '</span></a>' + ' (' + allTags[tag] + ') ';
+  allTagsHTML += '<a href="#tag-' + tag + '" class="' + calculateTagsClass(allTags[tag], tagsParams) + '"><span>' + tag + '</span></a> ';
 }
 /* [NEW] END LOOP: for each tag in allTags: */
 
