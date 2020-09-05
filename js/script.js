@@ -183,10 +183,10 @@
         const tagHTMLData = { id: tag, title: tag };
         const tagHTML = templates.tagLink(tagHTMLData);
 
-        console.log('tag HTML:', tagHTML);
+        //console.log('tag HTML:', tagHTML);
 
         /* add generated code to html variable */
-        html = html + '&nbsp;' + tagHTML;
+        html = html + tagHTML;
 
 
         /* [NEW] check if this link is NOT already in allTags */
@@ -362,7 +362,7 @@
       /* [NEW] END LOOP: for each articleAuthor in allAuthorArticles: */
     }
     /*[NEW] add HTML from allAuthorsHTML to authorsList */
-    authorsList.innerHTML = allAuthorsData;
+    authorsList.innerHTML = templates.authorRightLink(allAuthorsData);
     console.log('allAuthorsData:', allAuthorsData);
     console.log('authorsList:', authorsList);
   }

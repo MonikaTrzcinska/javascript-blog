@@ -77,7 +77,7 @@ body {
   font-weight: bold;
 }
 
-.list-horizontal li {
+.list-horizontal li, .list.tags li {
   display: inline-block;
 }
 
